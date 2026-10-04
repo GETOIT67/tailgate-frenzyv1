@@ -1,6 +1,8 @@
 # tailgate-frenzyv1
 haha funny truck parkour game
 Tailgate Frenzy
+<img width="1365" height="647" alt="Screenshot 2026-10-04 9 08 50 AM" src="https://github.com/user-attachments/assets/15d19b55-91ad-4337-bf0e-81e720e2e719" /> <img width="1055" height="499" alt="image" src="https://github.com/user-attachments/assets/32ac316c-8cbd-461a-9c21-d48c9f5453e2" />
+
 
 haha funny truck parkour game
 
