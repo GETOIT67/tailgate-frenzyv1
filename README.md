@@ -1,63 +1,80 @@
-# tailgate-frenzyv1
-haha funny truck parkour game
-Tailgate Frenzy
-<img width="1365" height="647" alt="Screenshot 2026-10-04 9 08 50 AM" src="https://github.com/user-attachments/assets/15d19b55-91ad-4337-bf0e-81e720e2e719" /> <img width="1055" height="499" alt="image" src="https://github.com/user-attachments/assets/32ac316c-8cbd-461a-9c21-d48c9f5453e2" />
+# 🚛 Tailgate Frenzy
 
-
-haha funny truck parkour game
+> **haha funny truck parkour game**
 
 Tailgate Frenzy is a chaotic little browser game where you do questionable things with trucks.
 
 Jump, climb, dodge, and parkour your way through the map while trying not to get absolutely folded by a truck. 💀
 
-*Hosted version coming soon.*
+## 🎮 Play
 
-Features
+**[▶️ Play Tailgate Frenzy](https://getoit67.github.io/tailgate-frenzyv1/)**
 
-Trucks
-Parkour
-Chaos
-Questionable game design decisions
-Runs directly in your browser
-Probably more fun than it has any right to be
+Runs directly in a modern web browser — no installation required.
 
-Version
+## 📸 Screenshots
 
-Tailgate Frenzy v1.0
+<img width="1365" height="647" alt="Tailgate Frenzy screenshot" src="https://github.com/user-attachments/assets/15d19b55-91ad-4337-bf0e-81e720e2e719" />
 
-Development is officially COMPLETE
+<img width="1055" height="499" alt="Tailgate Frenzy screenshot" src="https://github.com/user-attachments/assets/32ac316c-8cbd-461a-9c21-d48c9f5453e2" />
 
-The game is now entering the playtesting/polishing phase, where bugs will be hunted down one by one.
+*More screenshots coming as the game gets polished.*
 
-Bug Reports
+## 🏁 Features
+
+- 🚛 Trucks
+- 🏃 Parkour
+- 💥 Chaos
+- 🎮 Playable directly in your browser
+- 🎵 In-game music
+- 🛒 Shop
+- 📈 Score chasing
+- 🤨 Questionable game design decisions
+
+## 🏆 Current Record
+
+**GETOIT67 — 8,545**
+
+The online leaderboard is planned as a future feature.
+
+## 📦 Version
+
+**Tailgate Frenzy v1.0**
+
+The core game is complete and is currently in the playtesting and polishing phase.
+
+### Current focus
+
+- 🐛 Bug fixes
+- ✨ Gameplay polish
+- ⚡ Performance improvements
+- 🏆 Online leaderboard
+- 🌐 General chaos
+
+## 🐛 Bug Reports
 
 Found something broken?
 
-Please report it with:
+When reporting a bug, include:
 
-* What happened
-* What you were doing when it happened
-* What you expected to happen
-* What actually happened
-* Your browser/device
+- What happened
+- What you were doing when it happened
+- What you expected to happen
+- What actually happened
+- Your browser/device
 
-The more cursed the bug, the more useful the report.
+The more cursed the bug, the more useful the report. 💀
 
-Development
+## 🛠️ Development
 
-Tailgate Frenzy is built as a standalone HTML game and is designed to run in modern web browsers.
+Tailgate Frenzy is built as a standalone HTML/CSS/JavaScript browser game and is designed to run on modern web browsers.
 
-Future updates will focus on:
+The game is hosted through GitHub Pages.
 
-* Bug fixes
-* Gameplay polish
-* Performance improvements
-* General chaos
+## 📜 Usage
 
-License
-
-This project is ONLY able to be used by the tailgate frenzy Github  page  and hoodamath.com
+This project is intended for use through the official Tailgate Frenzy GitHub Pages site and hoodamath.com.
 
 ---
 
-Tailgate Frenzy — haha funny truck parkour game™
+**Tailgate Frenzy — haha funny truck parkour game™** 🚛
