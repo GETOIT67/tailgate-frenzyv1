@@ -1,7 +1,7 @@
 # 🚛 Tailgate Frenzy
 
 > **haha funny truck parkour game**
-
+newest versions will be uploaded in HTML releases because github is bad at updating the page
 Tailgate Frenzy is a chaotic little browser game where you do questionable things with trucks.
 
 Jump, climb, dodge, and parkour your way through the map while trying not to get absolutely folded by a truck. 💀
