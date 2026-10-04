@@ -1772,7 +1772,7 @@ function loop(t){
 /* ---------------------------------------------------------------------
    9. ONLINE LEADERBOARD  (Supabase REST API - only the PUBLIC key lives here)
    --------------------------------------------------------------------- */
-const LB_URL='https://qcsyfchdvrmhmeyntmdk.supabase.co/rest/v1/';            // e.g. https://abcdxyz.supabase.co
+const LB_URL='https://qcsyfchdvrmhmeyntmdk.supabase.co';            // e.g. https://abcdxyz.supabase.co
 const LB_KEY='sb_publishable_C4X4ItvLMs_7Q1PWkwfL-g__slV4ep8'; // sb_publishable_... (or the legacy "anon" key). Public by design.
 const LB_ON=LB_URL.indexOf('YOUR_')<0&&LB_KEY.indexOf('YOUR_')<0;
 const $=id=>document.getElementById(id);
