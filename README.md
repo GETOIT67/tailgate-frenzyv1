@@ -42,18 +42,6 @@ Tailgate Frenzy now has an **online leaderboard**!
 
 Compete for the highest score and see how you stack up against other players.
 
-## 📦 Current Version
-
-**Tailgate Frenzy v1.4.0**
-
-### What's new in v1.4.0
-
-* 🏆 Added online leaderboards
-* 📱 Added mobile optimizations
-* 🛒 Added the shop
-* 🎵 Added music to the main menu
-* ✨ More general polish and improvements
-
 Newer versions are released as HTML files through GitHub Releases.
 
 ## 🐛 Bug Reports
