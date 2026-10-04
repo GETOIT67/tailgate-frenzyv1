@@ -157,6 +157,24 @@ button.big:disabled{opacity:.5;pointer-events:none}
 .crTrack{font-size:clamp(13px,2.8vw,16px);font-weight:800;letter-spacing:.04em;line-height:1.5}
 a.crMail{color:var(--y);font-weight:900;font-size:clamp(14px,3vw,18px);letter-spacing:.04em;text-decoration:none;border-bottom:2px solid rgba(255,210,31,.5);user-select:text;-webkit-user-select:text}
 .crThanks{margin:30px 0 24px;font-size:clamp(15px,3vw,19px);font-weight:900;letter-spacing:.06em;color:#fff;text-shadow:0 0 18px var(--pink)}
+
+/* ---------- owner panel ---------- */
+#ownerLoginBtn{margin-top:18px;font:inherit;font-size:12px;font-weight:900;letter-spacing:.14em;color:#fff;background:rgba(255,61,139,.25);border:1px solid rgba(255,61,139,.5);border-radius:999px;padding:8px 16px;cursor:pointer}
+#ownerLoginBtn:hover{background:rgba(255,61,139,.4)}
+#ownerPanel{display:none;margin-top:20px;padding:16px;background:rgba(0,0,0,.55);border:2px solid var(--pink);border-radius:14px;text-align:center}
+#ownerPanel.show{display:block}
+#ownerPanel h3{margin:0 0 12px;color:var(--y);font-size:18px;letter-spacing:.15em}
+#ownerPanel .op-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+#ownerPanel input{font:inherit;font-size:14px;font-weight:800;padding:8px 12px;border-radius:999px;border:2px solid rgba(255,255,255,.3);background:rgba(0,0,0,.5);color:#fff;text-align:center;width:140px;outline:0}
+#ownerPanel input:focus{border-color:var(--cy)}
+#ownerPanel button{font:inherit;font-weight:900;font-size:12px;letter-spacing:.08em;padding:8px 14px;border:0;border-radius:999px;cursor:pointer;background:var(--y);color:#000}
+#ownerPanel button.danger{background:var(--pink);color:#fff}
+#ownerStatus{min-height:18px;margin-top:8px;font-size:13px;font-weight:900;letter-spacing:.1em;color:var(--cy)}
+#ownerLoginForm{display:none;margin-top:16px;padding:14px;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.2);border-radius:12px}
+#ownerLoginForm.show{display:block}
+#ownerPass{width:180px;max-width:90%;font:inherit;font-size:15px;font-weight:800;padding:10px;border-radius:999px;border:2px solid rgba(255,255,255,.3);background:rgba(0,0,0,.5);color:#fff;text-align:center;outline:0;letter-spacing:.1em}
+#ownerPass:focus{border-color:var(--pink)}
+
 </style>
 </head>
 <body data-mode="menu">
@@ -292,7 +310,32 @@ a.crMail{color:var(--y);font-weight:900;font-size:clamp(14px,3vw,18px);letter-sp
     <div class="crHead">CONTACT ME</div>
     <a class="crMail" href="mailto:greenmonkvr53@gmail.com">greenmonkvr53@gmail.com</a>
 
-    <div class="crThanks">Thanks for playing my game -paul</div>
+    <div class="crThanks">Thanks for playing my dumb little game -paul</div>
+
+    <button id="ownerLoginBtn" type="button">OWNER LOGIN</button>
+    <div id="ownerLoginForm">
+      <div style="font-size:13px;font-weight:900;letter-spacing:.15em;margin-bottom:10px;color:var(--y)">ENTER OWNER PASSWORD</div>
+      <input id="ownerPass" type="password" maxlength="20" placeholder="PASSWORD" autocomplete="off">
+      <div class="op-row" style="margin-top:12px">
+        <button id="ownerPassSubmit" type="button">UNLOCK</button>
+        <button id="ownerPassCancel" type="button" style="background:#555;color:#fff">CANCEL</button>
+      </div>
+      <div id="ownerLoginStatus" style="min-height:18px;margin-top:8px;font-size:12px;font-weight:900;color:var(--pink)"></div>
+    </div>
+    <div id="ownerPanel">
+      <h3>WELCOME OWNER</h3>
+      <div style="font-size:12px;opacity:.8;margin-bottom:10px">Local test tools only. Leaderboard deletes require server RPC.</div>
+      <div class="op-row">
+        <input id="ownerScoreInput" type="number" placeholder="SCORE" min="0">
+        <button id="ownerSetScore" type="button">SET LOCAL SCORE</button>
+      </div>
+      <div class="op-row">
+        <input id="ownerDelName" type="text" maxlength="12" placeholder="PLAYER NAME" autocomplete="off" style="text-transform:uppercase">
+        <button id="ownerDelBtn" class="danger" type="button">DELETE FROM LB</button>
+      </div>
+      <div id="ownerStatus"></div>
+    </div>
+
   </div>
   <button class="big secondary" id="crBack">BACK</button>
 </div>
@@ -1930,13 +1973,95 @@ function crShow(open){
 $('creditsBtn').addEventListener('click',e=>{ e.currentTarget.blur(); crShow(true); });
 $('crBack').addEventListener('click',e=>{ e.currentTarget.blur(); crShow(false); });
 
+/* ---- owner login (password gate) ---- */
+let ownerUnlocked=false, ownerAttempts=0;
+const OWNER_PASS='PN@2872';
+const OWNER_MAX=5;
+function ownerMsg(t,el){ (el||$('ownerStatus')).textContent=t||''; }
+function showOwnerLogin(show){
+  const f=$('ownerLoginForm');
+  if(!f) return;
+  f.classList.toggle('show',!!show);
+  if(show){ $('ownerPass').value=''; $('ownerLoginStatus').textContent=''; setTimeout(()=>$('ownerPass').focus(),50); }
+}
+function tryOwnerLogin(){
+  const p=($('ownerPass').value||'');
+  if(p===OWNER_PASS){
+    ownerUnlocked=true; ownerAttempts=0;
+    showOwnerLogin(false);
+    $('ownerPanel').classList.add('show');
+    $('ownerLoginBtn').style.display='none';
+    ownerMsg('ACCESS GRANTED');
+    try{ sfx.jump(); }catch(e){}
+    return;
+  }
+  ownerAttempts++;
+  const left=OWNER_MAX-ownerAttempts;
+  $('ownerLoginStatus').textContent=left>0?('WRONG PASSWORD · '+left+' ATTEMPT'+(left===1?'':'S')+' LEFT'):'LOCKED';
+  $('ownerPass').value='';
+  try{ sfx.quake&&sfx.quake(); }catch(e){}
+  if(ownerAttempts>=OWNER_MAX){
+    try{ window.close(); }catch(e){}
+    try{ window.location.replace('about:blank'); }catch(e){}
+    document.documentElement.innerHTML='<body style="background:#0a0620;color:#ff3d8b;font-family:system-ui;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-weight:900;letter-spacing:.2em">ACCESS DENIED</body>';
+  }
+}
+$('ownerLoginBtn').addEventListener('click',e=>{ e.currentTarget.blur(); if(ownerUnlocked){ $('ownerPanel').classList.add('show'); return; } showOwnerLogin(true); });
+$('ownerPassSubmit').addEventListener('click',e=>{ e.currentTarget.blur(); tryOwnerLogin(); });
+$('ownerPassCancel').addEventListener('click',e=>{ e.currentTarget.blur(); showOwnerLogin(false); });
+$('ownerPass').addEventListener('keydown',e=>{ if(e.code==='Enter'){ e.preventDefault(); tryOwnerLogin(); } e.stopPropagation(); });
+$('ownerSetScore').addEventListener('click',e=>{
+  e.currentTarget.blur();
+  if(!ownerUnlocked) return;
+  const v=parseInt($('ownerScoreInput').value,10);
+  if(!isFinite(v)||v<0){ ownerMsg('ENTER A VALID SCORE'); return; }
+  S.score=v;
+  if(v>S.best){ S.best=v; }
+  saveProgress();
+  hTxt('score', Math.floor(S.score));
+  hTxt('best', S.best);
+  ownerMsg('LOCAL SCORE SET TO '+v+' (does not affect leaderboard)');
+  try{ sfx.coin(); }catch(e){}
+});
+$('ownerDelBtn').addEventListener('click',async e=>{
+  e.currentTarget.blur();
+  if(!ownerUnlocked) return;
+  const n=cleanName($('ownerDelName').value);
+  if(!n){ ownerMsg('ENTER A PLAYER NAME'); return; }
+  ownerMsg('DELETING '+n+'...');
+  try{
+    // Attempts common admin RPC names; backend must implement one of these for real deletes
+    let r=null;
+    try{ r=await lbCall('admin_delete_score',{p_name:n,p_key:lbKey,p_pass:OWNER_PASS}); }catch(err){}
+    if(!r){ try{ r=await lbCall('delete_score',{p_name:n,p_key:lbKey}); }catch(err){} }
+    if(!r){ try{ r=await lbCall('admin_delete',{p_name:n}); }catch(err){} }
+    if(r&&(r.ok||r.deleted||r.success)){
+      ownerMsg('DELETED '+n+(r.rank!=null?' (was #'+r.rank+')':''));
+      try{ if(lbOpen) lbLoad(); }catch(e){}
+    } else {
+      ownerMsg('DELETE FAILED · RPC not available on server (name: '+n+')');
+    }
+  }catch(err){
+    ownerMsg('DELETE UNAVAILABLE · server has no admin delete RPC');
+  }
+});
+
+
 // While a panel is open or a name is being typed, keys must not reach the game (jump / restart / start / mute).
 window.addEventListener('keydown',e=>{
   const typing=e.target&&e.target.tagName==='INPUT';
   if(!typing&&!lbOpen&&!crOpen) return;
   if(e.code==='KeyM'&&!typing) return;
-  if(e.code==='Escape'){ if(lbOpen) lbShow(false); else if(crOpen) crShow(false); else e.target.blur(); }
-  else if(e.code==='Enter'&&typing) lbSubmit();
+  if(e.code==='Escape'){
+    if(lbOpen) lbShow(false);
+    else if($('ownerLoginForm')&&$('ownerLoginForm').classList.contains('show')) showOwnerLogin(false);
+    else if(crOpen) crShow(false);
+    else e.target.blur();
+  }
+  else if(e.code==='Enter'&&typing){
+    if(e.target&&e.target.id==='ownerPass') tryOwnerLogin();
+    else if(e.target&&e.target.id==='lbName') lbSubmit();
+  }
   e.stopPropagation();
 },true);
 window.addEventListener('keyup',e=>{ if(lbOpen||crOpen||(e.target&&e.target.tagName==='INPUT')) e.stopPropagation(); },true);
