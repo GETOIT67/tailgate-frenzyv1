@@ -54,7 +54,7 @@ Future updates will focus on:
 
 License
 
-This project is only able to be used by the tailgate frenzy Google sites and hoodamath.com
+This project is ONLY able to be used by the tailgate frenzy Github  page  and hoodamath.com
 
 ---
 
