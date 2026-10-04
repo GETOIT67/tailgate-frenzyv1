@@ -1,10 +1,12 @@
 # 🚛 Tailgate Frenzy
 
 > **haha funny truck parkour game**
-newest versions will be uploaded in HTML releases because github is bad at updating the page
+
+Newest versions are uploaded as HTML releases because GitHub is bad at updating the page.
+
 Tailgate Frenzy is a chaotic little browser game where you do questionable things with trucks.
 
-Jump, climb, dodge, and parkour your way through the map while trying not to get absolutely folded by a truck. 💀
+Jump, climb, dodge, parkour, chase high scores, buy stuff, and try not to get absolutely folded by a truck. 💀
 
 ## 🎮 Play
 
@@ -22,34 +24,37 @@ Runs directly in a modern web browser — no installation required.
 
 ## 🏁 Features
 
-- 🚛 Trucks
-- 🏃 Parkour
-- 💥 Chaos
-- 🎮 Playable directly in your browser
-- 🎵 In-game music
-- 🛒 Shop
-- 📈 Score chasing
-- 🤨 Questionable game design decisions
+* 🚛 Trucks
+* 🏃 Parkour
+* 💥 Chaos
+* 🎮 Playable directly in your browser
+* 🎵 In-game music
+* 🎶 Music in the main menu
+* 🛒 In-game shop
+* 📈 Score chasing
+* 🏆 Online leaderboard
+* 📱 Mobile optimizations
+* 🤨 Questionable game design decisions
 
-## 🏆 Current Record
+## 🏆 Leaderboard
 
-**GETOIT67 — 8,545**
+Tailgate Frenzy now has an **online leaderboard**!
 
-The online leaderboard is planned as a future feature.
+Compete for the highest score and see how you stack up against other players.
 
-## 📦 Version
+## 📦 Current Version
 
-**Tailgate Frenzy v1.0**
+**Tailgate Frenzy v1.4.0**
 
-The core game is complete and is currently in the playtesting and polishing phase.
+### What's new in v1.4.0
 
-### Current focus
+* 🏆 Added online leaderboards
+* 📱 Added mobile optimizations
+* 🛒 Added the shop
+* 🎵 Added music to the main menu
+* ✨ More general polish and improvements
 
-- 🐛 Bug fixes
-- ✨ Gameplay polish
-- ⚡ Performance improvements
-- 🏆 Online leaderboard
-- 🌐 General chaos
+Newer versions are released as HTML files through GitHub Releases.
 
 ## 🐛 Bug Reports
 
@@ -57,11 +62,11 @@ Found something broken?
 
 When reporting a bug, include:
 
-- What happened
-- What you were doing when it happened
-- What you expected to happen
-- What actually happened
-- Your browser/device
+* What happened
+* What you were doing when it happened
+* What you expected to happen
+* What actually happened
+* Your browser/device
 
 The more cursed the bug, the more useful the report. 💀
 
