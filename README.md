@@ -82,4 +82,41 @@ This project is intended for use through the official Tailgate Frenzy GitHub Pag
 
 ---
 
-**Tailgate Frenzy — haha funny truck parkour game™** 🚛
+# 🚛 TAILGATE FRENZY
+
+### Lab Grown Productions © 2026
+
+**Paul Marcelino**
+
+---
+
+## Special Thanks
+
+**Claude** — Coding help
+**ChatGPT** — Explaining
+**GitHub Pages** — Game hosting
+**Supabase** — Leaderboard API
+**Nujabes** — Menu music
+**Rainbow Six Siege** — Break activities
+**Jackson Metcalf** — Playtester
+**Charlie Metcalf** — Playtester
+**HoodaMath.com** — Secondary hosting
+
+---
+
+## 🎵 Menu Music
+
+**Nujabes feat. Shing02 — “Luv(sic) Part 4” (Instrumental)**
+
+---
+
+## 📧 Contact Me
+
+[greenmonkvr53@gmail.com](mailto:greenmonkvr53@gmail.com)
+
+---
+
+### Thanks for playing my dumb little game ❤️
+
+**— Paul**
+
