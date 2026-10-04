@@ -139,6 +139,24 @@ button.big:disabled{opacity:.5;pointer-events:none}
 #lbName{font:inherit;font-size:16px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;text-align:center;width:190px;padding:10px 14px;color:#fff;background:rgba(0,0,0,.5);border:2px solid rgba(255,255,255,.3);border-radius:999px;outline:0;user-select:text;-webkit-user-select:text}
 #lbName:focus{border-color:var(--cy)}
 .lbsm{font:inherit;font-weight:900;font-size:14px;letter-spacing:.1em;padding:10px 18px;border:0;border-radius:999px;cursor:pointer;color:#2a0a24;background:linear-gradient(180deg,#fff2a0,#ffd21f 55%,#ff9d00)}
+
+/* ---------- credits ---------- */
+#creditsBtn{position:absolute;top:max(10px,env(safe-area-inset-top));right:max(10px,env(safe-area-inset-right));font:inherit;font-size:12px;font-weight:900;letter-spacing:.14em;color:#fff;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:8px 14px;cursor:pointer;opacity:.85}
+#creditsBtn:hover{opacity:1;border-color:var(--cy)}
+#creditsBtn:active{transform:translateY(2px)}
+#credits{flex-direction:column;background:radial-gradient(ellipse at center,rgba(10,6,32,.62),rgba(10,6,32,.92))}
+#credits .card{flex:0 1 auto;min-height:0;max-height:calc(100vh - 108px);max-height:calc(100dvh - 108px);padding:12px 0 34px;
+  -webkit-mask-image:linear-gradient(#000 calc(100% - 30px),transparent);mask-image:linear-gradient(#000 calc(100% - 30px),transparent)}
+#credits #crBack{flex:none;margin:8px 5px 0;padding:11px 36px;font-size:clamp(17px,3.4vw,22px)}
+#credits h1.crTitle{font-size:clamp(30px,7.5vw,64px);line-height:1}
+.crLine{margin:10px 0 0;font-size:clamp(15px,3vw,20px);font-weight:800;letter-spacing:.1em}
+.crLine.name{color:var(--y);font-weight:900}
+.crHead{margin:28px 0 10px;font-size:13px;letter-spacing:.3em;font-weight:900;color:var(--cy)}
+.crList div{margin:6px 0;font-size:clamp(14px,3vw,18px);font-weight:700;letter-spacing:.04em}
+.crList b{color:var(--y);font-weight:900}
+.crTrack{font-size:clamp(13px,2.8vw,16px);font-weight:800;letter-spacing:.04em;line-height:1.5}
+a.crMail{color:var(--y);font-weight:900;font-size:clamp(14px,3vw,18px);letter-spacing:.04em;text-decoration:none;border-bottom:2px solid rgba(255,210,31,.5);user-select:text;-webkit-user-select:text}
+.crThanks{margin:30px 0 24px;font-size:clamp(15px,3vw,19px);font-weight:900;letter-spacing:.06em;color:#fff;text-shadow:0 0 18px var(--pink)}
 </style>
 </head>
 <body data-mode="menu">
@@ -173,6 +191,7 @@ button.big:disabled{opacity:.5;pointer-events:none}
 <div id="banner"></div>
 
 <div id="start" class="screen">
+  <button id="creditsBtn">CREDITS</button>
   <div class="card">
     <h1>TAILGATE<br>FRENZY</h1>
     <div class="tag">HOP THE ENDLESS CONVOY &middot; DON'T FALL</div>
@@ -246,6 +265,36 @@ button.big:disabled{opacity:.5;pointer-events:none}
       <button class="big secondary" id="lbBack">BACK</button>
     </div>
   </div>
+</div>
+
+<div id="credits" class="screen hidden">
+  <div class="card">
+    <h1 class="crTitle">TAILGATE FRENZY V5</h1>
+    <div class="crLine">Lab Grown Productions 2026</div>
+    <div class="crLine name">Paul Marcelino</div>
+
+    <div class="crHead">SPECIAL THANKS</div>
+    <div class="crList">
+      <div><b>Claude</b> (coding help)</div>
+      <div><b>ChatGPT</b> (explaining)</div>
+      <div><b>Github Pages</b> (game hosting)</div>
+      <div><b>Suprabase</b> (leaderboard apis)</div>
+      <div><b>Nujabes</b> (menu music)</div>
+      <div><b>Rainbow 6 Siege</b> (break activities)</div>
+      <div><b>Jackson Metcalf</b> (playtester)</div>
+      <div><b>Charlie Metcalf</b> (playtester)</div>
+      <div><b>Hoodamath.com</b> (secondary hosting)</div>
+    </div>
+
+    <div class="crHead">MENU MUSIC</div>
+    <div class="crTrack">Nujabes feat. Shing02 // Luv(sic) Part 4 // Instrumental</div>
+
+    <div class="crHead">CONTACT ME</div>
+    <a class="crMail" href="mailto:greenmonkvr53@gmail.com">greenmonkvr53@gmail.com</a>
+
+    <div class="crThanks">Thanks for playing my game -paul</div>
+  </div>
+  <button class="big secondary" id="crBack">BACK</button>
 </div>
 
 <div id="touch">
@@ -1858,22 +1907,39 @@ function lbLoad(){   // runs only when the panel opens or REFRESH is pressed - n
   }).catch(()=>{ list.textContent=''; st.textContent='LEADERBOARD UNAVAILABLE'; })
   .then(()=>{ lbLoading=false; setTimeout(()=>{ $('lbRefresh').disabled=false; },2000); });
 }
-function lbShow(open){ lbOpen=open; $('lb').classList.toggle('hidden',!open); if(open) lbLoad(); }
+let lbFrom=null;   // which screen opened the panel ('start' or 'over') so BACK returns to it
+function lbShow(open){
+  lbOpen=open; $('lb').classList.toggle('hidden',!open);
+  if(open){ lbFrom=$('over').classList.contains('hidden')?'start':'over'; $(lbFrom).classList.add('hidden'); lbLoad(); }
+  else if(lbFrom){ $(lbFrom).classList.remove('hidden'); lbFrom=null; }
+}
 
 ['lbOpenStart','lbOpenOver'].forEach(id=>$(id).addEventListener('click',e=>{ audioInit(); e.currentTarget.blur(); lbShow(true); }));
 $('lbBack').addEventListener('click',e=>{ e.currentTarget.blur(); lbShow(false); });
 $('lbRefresh').addEventListener('click',e=>{ e.currentTarget.blur(); lbLoad(); });
 $('lbSubmit').addEventListener('click',e=>{ e.currentTarget.blur(); lbSubmit(); });
-// While the panel is open or a name is being typed, keys must not reach the game (jump / restart / mute).
+/* ---- credits screen: opened from the title screen; mode stays 'menu' so the menu music keeps playing ---- */
+let crOpen=false;
+function crShow(open){
+  crOpen=open;
+  $('credits').classList.toggle('hidden',!open);
+  $('start').classList.toggle('hidden',open);
+  audioInit(); try{ if(open) sfx.jump(); else sfx.land(1); }catch(e){}
+  if(open){ const c=$('credits').firstElementChild; if(c) c.scrollTop=0; }
+}
+$('creditsBtn').addEventListener('click',e=>{ e.currentTarget.blur(); crShow(true); });
+$('crBack').addEventListener('click',e=>{ e.currentTarget.blur(); crShow(false); });
+
+// While a panel is open or a name is being typed, keys must not reach the game (jump / restart / start / mute).
 window.addEventListener('keydown',e=>{
   const typing=e.target&&e.target.tagName==='INPUT';
-  if(!typing&&!lbOpen) return;
+  if(!typing&&!lbOpen&&!crOpen) return;
   if(e.code==='KeyM'&&!typing) return;
-  if(e.code==='Escape'){ if(lbOpen) lbShow(false); else e.target.blur(); }
+  if(e.code==='Escape'){ if(lbOpen) lbShow(false); else if(crOpen) crShow(false); else e.target.blur(); }
   else if(e.code==='Enter'&&typing) lbSubmit();
   e.stopPropagation();
 },true);
-window.addEventListener('keyup',e=>{ if(lbOpen||(e.target&&e.target.tagName==='INPUT')) e.stopPropagation(); },true);
+window.addEventListener('keyup',e=>{ if(lbOpen||crOpen||(e.target&&e.target.tagName==='INPUT')) e.stopPropagation(); },true);
 
 // Start auto mode in background
 reset(true);
